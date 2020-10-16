@@ -44,6 +44,12 @@ class HomeTableViewController: UITableViewController {
         tableView.refreshControl = myRefreshControl
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.loadTweets()
+    }
+
+    
     // Create an action for a logout button to perform logout
     @IBAction func onLogout(_ sender: Any) {
         TwitterAPICaller.client?.logout()
