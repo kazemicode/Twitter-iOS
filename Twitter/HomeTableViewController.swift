@@ -42,6 +42,9 @@ class HomeTableViewController: UITableViewController {
         // pull to refresh
         myRefreshControl.addTarget(self, action: #selector(loadTweets), for: .valueChanged)
         tableView.refreshControl = myRefreshControl
+        tableView.estimatedRowHeight = 150
+        tableView.rowHeight = UITableView.automaticDimension
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,6 +75,9 @@ class HomeTableViewController: UITableViewController {
         cell.userHandleLabel.text =  "@" + ((user!["screen_name"] as? String)!)
         cell.userNameLabel.text = user!["name"] as? String
         cell.tweetContent.text = tweetArray[indexPath.row]["text"] as? String
+        cell.setFavorite(_isFavorited: tweetArray[indexPath.row]["favorited"] as! Bool) // get current fav status of a tweet
+        cell.setRetweet(_isRetweeted: tweetArray[indexPath.row]["retweeted"] as! Bool) // get current retweet statuts of a tweet
+        cell.tweetId = tweetArray[indexPath.row]["id"] as! Int // get Tweet ID
        
         return cell
     }
